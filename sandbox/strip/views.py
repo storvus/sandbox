@@ -1,14 +1,11 @@
-import json
-
 import stripe
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
-from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 
-from settings import STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY
+from sandbox.settings import STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY
 
 
 @method_decorator(login_required, name="dispatch")
