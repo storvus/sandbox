@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-b7(4&1ab(efa9n%ob)_box^&e=g%+0jjzkh&)8^n!4dxpkpjnh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["sandbox.storv.us"]
 
 
 # Application definition
