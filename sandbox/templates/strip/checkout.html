@@ -23,7 +23,7 @@
                 stripe.confirmPayment({
                     elements,
                     confirmParams: {
-                        return_url: "http://" + window.location.host + "/stripe/completed-payment"
+                        return_url: "https://" + window.location.host + "/stripe/completed-payment/"
                     }
                 })
             })

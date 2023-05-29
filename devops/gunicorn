@@ -2,7 +2,7 @@
 
 exec gunicorn \
   --bind=0.0.0.0:8004 \
-  --pid=/tmp/gunicorn_blog.pid \
+  --pid=/tmp/gunicorn_sandbox.pid \
   --access-logfile="-" \
   --error-logfile="-" \
   --log-level=info \
