@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+
+{% block content %}
+{% if not user.is_authenticated %}
+<div>
+    <h5>Auth options</h5>
+    <ul style="overflow: hidden">
+        <li>
+            <a href="{% url 'social:begin' 'google-oauth2' %}">Google</a>
+        </li>
+        <li>
+            <a href="{% url 'social:begin' 'email' %}">Email</a>
+        </li>
+        <li>
+            <a href="{% url 'social:begin' 'username' %}">Username</a>
+        </li>
+    </ul>
+</div>
+{% endif %}
+{% endblock %}

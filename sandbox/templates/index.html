@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+    <title>{{ title }}</title>
+    {% block scripts %}
+    <script src="https://js.stripe.com/v3/"></script>
+    {% endblock %}
+</head>
+<body style="background: #eee;">
+    <h5>User info</h5>
+    <ul>
+        <li>User: {{ user }}</li>
+        <li>ID: {{ user.id }}</li>
+        <li>Username: {{ user.username }}</li>
+        <li>Email: {{ user.email }}</li>
+        <li>Password: {{ user.password }}</li>
+    </ul>
+    {% block content %}
+    {% endblock %}
+    {% if user.is_authenticated %}
+        <h5>Profile</h5>
+        <ul style="overflow: hidden">
+            <li>
+                <a href="{% url 'strip:checkout' %}">Checkout</a>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}">Logout</a>
+            </li>
+        </ul>
+    {% endif %}
+</body>
+</html>

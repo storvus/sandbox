@@ -1,0 +1,39 @@
+{% extends "index.html" %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script lang="text/javascript">
+        document.addEventListener("DOMContentLoaded", async () => {
+            const { stripePublishKey } = await fetch("/stripe/config").then(r => r.json())
+            const stripe = Stripe(stripePublishKey)
+            const { clientSecret } = await fetch("/stripe/create-payment-intent/", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}"
+                }
+            }).then(r => r.json())
+
+            const elements = stripe.elements({ clientSecret })
+            const paymentElement = elements.create("payment")
+            paymentElement.mount("#payment-element")
+
+            const form = document.getElementById("payment-form")
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault()
+                stripe.confirmPayment({
+                    elements,
+                    confirmParams: {
+                        return_url: "http://" + window.location.host + "/stripe/completed-payment"
+                    }
+                })
+            })
+        })
+    </script>
+{% endblock %}
+
+{% block content %}
+<form id="payment-form" style="width: 30%; margin: 0 auto">
+    <div id="payment-element"></div>
+    <button>Pay</button>
+</form>
+{% endblock %}
