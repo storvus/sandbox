@@ -1,6 +1,6 @@
 from django.urls import path
 
-from strip.views import CheckoutView, stripe_config, create_payment_intent, webhooks, CompletedPayment
+from sandbox.strip.views import CheckoutView, stripe_config, create_payment_intent, webhooks, CompletedPayment
 
 app_name = "strip"
 
