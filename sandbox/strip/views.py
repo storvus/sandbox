@@ -31,20 +31,6 @@ class CheckoutView(TemplateView):
 class CompletedPayment(TemplateView):
     template_name = "strip/completed-payment.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # context["customers"] = stripe.Customer.create(
-        #     api_key=STRIPE_SECRET_KEY,
-        #     idempotency_key=str(self.request.user.id + 1),
-        #     email=self.request.user.email,
-        #     metadata={
-        #         "username": self.request.user.username,
-        #         "email": self.request.user.email,
-        #     }
-        # )
-        context["customers"] = stripe.Customer.retrieve("cus_Nz2N75oQN7wLQG", api_key=STRIPE_SECRET_KEY)
-        return context
-
 
 @login_required
 def stripe_config(request):
@@ -68,7 +54,7 @@ def create_payment_intent(request):
         api_key=STRIPE_SECRET_KEY,
         amount=1000,
         currency="usd",
-        customer="cus_Nz2N75oQN7wLQG",
+        customer=request.user.customer.customer_id,
         metadata={
             "order": 1,
             "user": request.user.id,

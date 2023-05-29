@@ -13,6 +13,7 @@
         <li>Username: {{ user.username }}</li>
         <li>Email: {{ user.email }}</li>
         <li>Password: {{ user.password }}</li>
+        <li>Stripe Customer ID: {{ user.customer.customer_id }}</li>
     </ul>
     {% block content %}
     {% endblock %}
